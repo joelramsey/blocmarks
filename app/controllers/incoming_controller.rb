@@ -1,29 +1,53 @@
 class IncomingController < ApplicationController
-
+  
   skip_before_action :verify_authenticity_token, only: [:create]
-
+  
   def create
-    logger.info "IncomingController#create: sender: #{params[:sender]}"
-    logger.info "IncomingController#create: subject: #{params[:subject]}"
-    logger.info "IncomingController#create: body: #{params['body-plain']}"
-
-    @user = User.find_by_email(params[:sender])
-     if @user.nil? 
-       @user = User.create(email: params[:sender], password: params[:subject])
-     end
-    @topic = Topic.find_by_title(params[:subject])
-       unless @topic 
-          @topic = Topic.create(title: params[:subject], user_id: @user_id )
-          @topic = Topic.new(params.require(:topic).permit(:title))
-          @topic.save
-        end
-    @url = params["body-plain"].split("\n").first
-   
-    @bookmark= @topic.bookmarks.build(url: @url, user_id: @user.id)
-    @bookmark.save
     
-
+    @user = User.find_by_email(the_sender)
+    if @user.nil?
+      @user = User.new(
+        name: the_name,
+        email: the_sender,
+        password: "password", # assign initial password for now...
+        password_confirmation: "password"
+      )
+      @user.skip_confirmation! # skip for now to pass user story
+      @user.save
+      # Email instructions to new user to change the default password would be sent here
+    end
+    
+    @topic = @user.topics.find_by_title(the_subject)
+    if @topic.nil?
+      @topic = @user.topics.build(title: the_subject)
+      @topic.save
+    end
+    
+    @bookmark = @topic.bookmarks.find_by_url(the_url)
+    if @bookmark.nil?
+      @bookmark = @topic.bookmarks.new(url: the_url)
+      @bookmark.save
+    end
+    
     head 200
   end
-
+  
+  private
+  
+  def the_sender
+    params[:sender]
+  end
+  
+  def the_name
+    params[:from]
+  end
+  
+  def the_subject
+    params[:subject]
+  end
+  
+  def the_url
+    params["body-plain"].chomp
+  end
+  
 end
