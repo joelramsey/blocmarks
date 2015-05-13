@@ -1,17 +1,10 @@
-class TopcisController < ApplicationController
-
+class TopicsController < ApplicationController
   def index
-    @topics = Topic.all
-  end
-
-  def new
+    @topics = current_user.topics.all
   end
 
   def show
+    @topic = Topic.find(params[:id])
+    @bookmarks = @topic.bookmarks.all
   end
-
-  def edit
-  end
-
-
 end
