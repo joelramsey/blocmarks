@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :topics
   resources :users, only: [:update, :show, :index]
   post :incoming, to: 'incoming#create'
+  
   get 'about' => 'welcome#about'
 
   root to: 'welcome#index'
