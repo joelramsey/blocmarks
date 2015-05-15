@@ -1,5 +1,25 @@
-<h1><%= @topic.title %></h1>
+<div class="row">
+  <div class="col-md-8">
+    
+    <h1 class="nudge-up-10">Bookmarks for <%= @topic.title %></h1>
+    
+    <%= link_to "Add Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-default' %>
 
-<% @bookmarks.each do |bookmark| %>
-<p><%= link_to bookmark.url%></p>
-<% end %>
+    <div class="list-group">
+      <h4 class="list-group-item list-group-item-info">&nbsp</h4>
+      <div class="list-group-item">
+        <% @bookmarks.each do |bookmark| %>
+          <p>
+            <%= link_to bookmark.url, target: "_blank", class: 'margin-left-10 margin-right-10' %>
+            <%= link_to "", edit_topic_bookmark_path(@topic, bookmark), class: 'glyphicon glyphicon-edit remove-color' %>
+            <%= link_to "", [@topic, bookmark], method: :delete, class: 'glyphicon glyphicon-remove-circle remove-color', data: { confirm: "Are you sure you want to remove #{bookmark.url}?" } %>
+          </p>
+        <% end %>
+        
+      </div>
+    </div>
+    
+    <%= link_to "Back", topics_path, class: 'margin-left-5' %>
+    
+  </div>
+</div>
