@@ -14,11 +14,11 @@
           <p>
             <%= link_to bookmark.url, target: "_blank", class: 'margin-left-10 margin-right-10' %>
             
-            <% if policy(@bookmarks).update? %>
+            <% if policy(bookmark).update? %>
               <%= link_to "", edit_topic_bookmark_path(@topic, bookmark), class: 'glyphicon glyphicon-edit remove-color' %>
             <% end %>
             
-            <% if policy(@bookmarks).destroy? %>
+            <% if policy(bookmark).destroy? %>
               <%= link_to "", [@topic, bookmark], method: :delete, class: 'glyphicon glyphicon-remove-circle remove-color', data: { confirm: "Are you sure you want to remove #{bookmark.url}?" } %>
             <% end %>
           </p>
