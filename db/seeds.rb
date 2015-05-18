@@ -22,17 +22,16 @@ users = User.all
  
  # The `save` method then saves this User to the database.
 
+ # Create an Admin user
+admin = User.new(
+  name: 'Joel Ramsey',
+  email: 'joel.d.ramsey@gmail.com',
+  password: 'bomb2336',
+  role: 'admin'
+  )
+admin.skip_confirmation!
+admin.save! 
 
-# Create an admin user
- admin = User.new(
-   name:     'Admin User',
-   email:    'example@example.com',
-   password: 'helloworld',
-   role:     'admin'
- )
- admin.skip_confirmation!
- admin.save!
- 
  # Create a moderator
  moderator = User.new(
    name:     'Moderator User',
@@ -51,6 +50,7 @@ users = User.all
  )
  member.skip_confirmation!
  member.save! 
+
 
 
 puts "Seed finished"

@@ -7,6 +7,7 @@ class TopicsController < ApplicationController
   def show
     @topic = the_topic
     @bookmarks = @topic.bookmarks.all
+    
   end
   
   def create
