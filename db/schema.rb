@@ -11,29 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517211227) do
+ActiveRecord::Schema.define(version: 20150505042242) do
 
-  create_table "bookmarks", force: :cascade do |t|
+  create_table "bookmarks", force: true do |t|
     t.string   "url"
     t.integer  "topic_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
     t.integer  "user_id"
   end
 
   add_index "bookmarks", ["topic_id"], name: "index_bookmarks_on_topic_id"
-  add_index "bookmarks", ["user_id"], name: "index_bookamrks_on_user_id"
+  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
 
-  create_table "topics", force: :cascade do |t|
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "bookmark_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["bookmark_id"], name: "index_likes_on_bookmark_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+
+  create_table "topics", force: true do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "topics", ["user_id"], name: "index_topics_on_user_id"
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -51,11 +62,8 @@ ActiveRecord::Schema.define(version: 20150517211227) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
-    
   end
 
-  
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

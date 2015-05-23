@@ -1,13 +1,12 @@
 class TopicsController < ApplicationController
   def index
-    @topics = current_user.topics.all
+    @topics = Topic.all
     @topic = Topic.new
   end
 
   def show
     @topic = the_topic
     @bookmarks = @topic.bookmarks.all
-    
   end
   
   def create
@@ -18,6 +17,7 @@ class TopicsController < ApplicationController
   
   def destroy
     @topic = the_topic
+    authorize @topic
     @topic.destroy
     redirect_to request.referrer
   end

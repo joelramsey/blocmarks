@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-md-8">
 
@@ -11,14 +12,16 @@
     <% @topics.each do |topic| %>
       <div class="list-group">  
         <h4 class="list-group-item list-group-item-info">
-          <%= link_to topic.title, topic %>
+          <%= link_to topic.title, topic %> 
+          <small><i class="remove-color">added by <%= topic.user.name %></i></small>
           <%= link_to "", topic, method: :delete, class: 'glyphicon glyphicon-remove-circle remove-color pull-right', data: { confirm: "Are you sure you want to remove #{topic.title}?" } %>
         </h4>            
         <div class="list-group-item">
           <% topic.bookmarks.each_with_index do |bookmark, index| %>
             <% unless index >= topic.bookmarks.count %>
               <p>
-                <%= link_to bookmark.url, target: "_blank", class: 'margin-left-10 margin-right-10' %>
+                <%= link_to bookmark.title, bookmark.url, target: "_blank", class: 'margin-left-10 margin-right-10' %>
+                <%= render partial: 'likes/like', locals: { bookmark: bookmark, topic: topic } %>
               </p>
             <% end %>
           <% end %>

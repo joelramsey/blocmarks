@@ -1,53 +1,14 @@
 @import "bootstrap-sprockets";
-@import "bootstrap";
+ @import "bootstrap";
 
-// margins, padding, positioning
+ .user-info {
+  margin-top: 9px;
+ }
 
-.nudge-down-5 {
-  position: relative;
-  top: 5px;
-}
-.nudge-down-10 {
-  position: relative;
-  top: 10px;
-}
-.nudge-left-5 {
-  position: relative;
-  left: -5px;
-}
-.nudge-up-10 {
-  position: relative;
-  top: -10px;
-}
-.margin-bottom-10 {
-  margin-bottom: 10px;
-}
-.margin-top-10 {
-  margin-top: 10px;
-}
-.margin-right-5 {
+ .nav {
+  margin-top: 5px;
+ }
+
+ .button-space {
   margin-right: 5px;
-}
-.margin-left-10 {
-  margin-left: 10px;
-}
-.inline-block {
-  display: inline-block;
-}
-
-// colors
-
-.remove-color {
-  color: steelblue;
-}
-a.remove-color:hover { 
-  text-decoration: none;
-}
-
-// height & width
-
-.input-topic {
-  width: 50%;
-  position: relative;
-  top: 1px;
-}
+ }
