@@ -7,19 +7,19 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   
-  <script> 
-    blocmetrics.report(){
-    var _bm_event = {
-      name: "sale",
-    }
+ <script>
+var _bm_event = {
+  event_name: "page hit",
+}
 
-    var _bm_request = new XMLHttpRequest();
-      _bm_request.open("POST", "http://localhost:3000/api/events", true);
-      _bm_request.setRequestHeader('Content-Type', 'application/json');
-      _bm_request.onreadystatechange = function() {
-    };
-      _bm_request.send(JSON.stringify(_bm_event)); }
-  </script>
+var _bm_request = new XMLHttpRequest();
+  _bm_request.open("POST", "http://majestic-beast-37-200845.usw1-2.nitrousbox.com/", true);
+  _bm_request.setRequestHeader('Content-Type', 'application/json');
+// #5
+  _bm_request.onreadystatechange = function() {
+};
+  _bm_request.send(JSON.stringify(_bm_event));
+ </script>
 
 </head>
 <body>
